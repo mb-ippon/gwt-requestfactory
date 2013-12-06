@@ -1,21 +1,36 @@
-package com.ippon.formation.gwt.shared.domain.entities;
+package com.ippon.formation.gwt.server.domain.entities;
 
 import java.io.Serializable;
 import java.util.Date;
 
-public class Player implements Serializable {
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import com.ippon.formation.gwt.shared.domain.entities.Plays;
+
+@Entity(name = "Player")
+@Table(name = "player")
+public class PlayerEntity implements Serializable {
 
     /**
      * 
      */
     private static final long serialVersionUID = -4312165633377357234L;
 
-    public Player() {
+    public PlayerEntity() {
 
     }
 
-    public Player(String name, int height, int weight, Date birthDay, Plays playHand, int yearTurnPro,
-            Integer atpPoint, Country country) {
+    public PlayerEntity(String name, int height, int weight, Date birthDay, Plays playHand, int yearTurnPro,
+            Integer atpPoint, CountryEntity country) {
         this.name = name;
         this.height = height;
         this.playHand = playHand;
@@ -26,20 +41,26 @@ public class Player implements Serializable {
         this.country = country;
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String name;
     private Date birthDay;
     private int height;
     private int weight;
     private int yearTurnPro;
     private Integer atpPoint;
-    private Country country;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "COUNTRY_ID")
+    private CountryEntity country;
+    @Enumerated(EnumType.ORDINAL)
     private Plays playHand;
 
-    public Country getCountry() {
+    public CountryEntity getCountry() {
         return country;
     }
 
-    public void setCountry(Country country) {
+    public void setCountry(CountryEntity country) {
         this.country = country;
     }
 
@@ -126,7 +147,7 @@ public class Player implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        Player other = (Player) obj;
+        PlayerEntity other = (PlayerEntity) obj;
         if (name == null) {
             if (other.name != null) {
                 return false;

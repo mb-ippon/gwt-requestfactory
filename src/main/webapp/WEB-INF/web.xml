@@ -5,17 +5,17 @@
          version="2.5"
          xmlns="http://java.sun.com/xml/ns/javaee">
          
-    <!-- paramétrage spring -->
-	<context-param>
-		<param-name>contextConfigLocation</param-name>
-		<param-value>
-			classpath:META-INF/application-context.xml
-			</param-value>
-	</context-param>     
-	<!-- listener spring -->
-	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
+	<!-- servlet rpc -->
+	<servlet>
+	  <servlet-name>playerService</servlet-name>
+	  <servlet-class>
+	    com.ippon.formation.gwt.server.service.PlayerServiceImpl
+	  </servlet-class>
+	</servlet>
+	<servlet-mapping>
+	  <servlet-name>playerService</servlet-name>
+	  <url-pattern>/FormationGWT/player</url-pattern>
+	</servlet-mapping>
   
   <!-- Default page to serve -->
   <welcome-file-list>

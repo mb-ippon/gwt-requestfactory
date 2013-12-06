@@ -1,5 +1,10 @@
 package com.ippon.formation.gwt.client.ui.activity;
 
+import java.util.List;
+
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.ippon.formation.gwt.client.domain.bindery.rpc.PlayerRPCAsync;
 import com.ippon.formation.gwt.client.ui.event.DisplayPlayerEvent;
 import com.ippon.formation.gwt.client.ui.resources.ApplicationResources;
 import com.ippon.formation.gwt.client.ui.view.PlayersView;
@@ -15,6 +20,8 @@ public class PlayersActivity implements PlayersView.Presenter {
 
     private final PlayersView display;
 
+    private final PlayerRPCAsync server = PlayerRPCAsync.Util.getInstance();
+
     public PlayersActivity(PlayersView display) {
         this.display = display;
         this.display.setPresenter(this);
@@ -26,6 +33,18 @@ public class PlayersActivity implements PlayersView.Presenter {
      */
     public void go() {
         display.loadingTable();
+        server.findClassement(new AsyncCallback<List<Player>>() {
+
+            @Override
+            public void onSuccess(List<Player> result) {
+                display.setData(result);
+            }
+
+            @Override
+            public void onFailure(Throwable caught) {
+                Window.alert(caught.getMessage());
+            }
+        });
 
     }
 

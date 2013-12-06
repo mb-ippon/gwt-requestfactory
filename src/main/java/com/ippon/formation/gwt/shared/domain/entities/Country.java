@@ -10,7 +10,6 @@ public class Country implements Serializable {
     private static final long serialVersionUID = 8873060740655964600L;
 
     private String code;
-
     private String libelle;
 
     public Country() {
@@ -36,5 +35,4 @@ public class Country implements Serializable {
     public void setLibelle(String libelle) {
         this.libelle = libelle;
     }
-
 }
