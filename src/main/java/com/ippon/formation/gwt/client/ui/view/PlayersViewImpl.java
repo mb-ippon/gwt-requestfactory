@@ -3,9 +3,11 @@ package com.ippon.formation.gwt.client.ui.view;
 import java.util.List;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.SelectionChangeEvent;
@@ -28,6 +30,8 @@ public class PlayersViewImpl extends Composite implements PlayersView {
 
     @UiField
     PlayersTable playersTable;
+    @UiField
+    Button addPlayer;
 
     @Override
     public void setData(List<Player> players) {
@@ -39,6 +43,11 @@ public class PlayersViewImpl extends Composite implements PlayersView {
         activity.onCellTableSelected(playersTable.getSelectedItem());
     }
 
+    @UiHandler("addPlayer")
+    void onAddPlayer(ClickEvent e) {
+        activity.onAddPlayer();
+    }
+
     @Override
     public void setPresenter(Presenter playersActivity) {
         this.activity = playersActivity;
@@ -47,6 +56,11 @@ public class PlayersViewImpl extends Composite implements PlayersView {
     @Override
     public void loadingTable() {
         playersTable.loadingTable();
+    }
+
+    @Override
+    public void unSelectedTable() {
+        playersTable.unSelected();
     }
 
 }

@@ -2,6 +2,8 @@ package com.ippon.formation.gwt.client.ui.activity;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.editor.client.SimpleBeanEditorDriver;
+import com.ippon.formation.gwt.client.ui.event.AddPlayerEvent;
+import com.ippon.formation.gwt.client.ui.event.AddPlayerHandler;
 import com.ippon.formation.gwt.client.ui.event.DisplayPlayerEvent;
 import com.ippon.formation.gwt.client.ui.event.DisplayPlayerHandler;
 import com.ippon.formation.gwt.client.ui.resources.ApplicationResources;
@@ -23,6 +25,7 @@ public class PlayerActivity implements Presenter {
 
     public PlayerActivity(PlayerView display) {
         this.display = display;
+        this.display.setPresenter(this);
         bind();
     }
 
@@ -53,6 +56,20 @@ public class PlayerActivity implements Presenter {
      * @param player
      */
     protected void displayPlayer(Player player) {
+        // TODO display a player
+    }
+
+    /**
+     * Ajoute un nouveau joueur
+     * 
+     */
+    protected void addPlayer() {
+        // TODO add a player
+    }
+
+    @Override
+    public void updatePlayer() {
+        // TODO update a player
 
     }
 
@@ -66,5 +83,14 @@ public class PlayerActivity implements Presenter {
                 displayPlayer(event.getPlayer());
             }
         });
+
+        ApplicationResources.getHandlerManager().addHandler(AddPlayerEvent.TYPE, new AddPlayerHandler() {
+
+            @Override
+            public void onAddPlayer(AddPlayerEvent event) {
+                addPlayer();
+            }
+        });
     }
+
 }

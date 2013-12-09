@@ -3,9 +3,12 @@ package com.ippon.formation.gwt.client.ui.view;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.editor.client.Editor;
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.IntegerBox;
 import com.google.gwt.user.client.ui.TextBox;
@@ -19,6 +22,8 @@ import com.ippon.formation.gwt.shared.domain.entities.Player;
 public class PlayerViewImpl extends Composite implements PlayerView, Editor<Player> {
 
     private static PlayerViewImplUiBinder uiBinder = GWT.create(PlayerViewImplUiBinder.class);
+
+    private Presenter activity;
 
     interface PlayerViewImplUiBinder extends UiBinder<Widget, PlayerViewImpl> {
     }
@@ -78,6 +83,19 @@ public class PlayerViewImpl extends Composite implements PlayerView, Editor<Play
     @UiField
     @Path("yearTurnPro")
     YearBox yearTurnPro;
+
+    @UiField
+    Button updatePlayer;
+
+    @UiHandler("updatePlayer")
+    void onUpdatePlayer(ClickEvent e) {
+        activity.updatePlayer();
+    }
+
+    @Override
+    public void setPresenter(Presenter playersActivity) {
+        this.activity = playersActivity;
+    }
 
     public PlayerViewImpl() {
         initWidget(uiBinder.createAndBindUi(this));

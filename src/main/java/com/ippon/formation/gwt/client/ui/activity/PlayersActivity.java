@@ -52,4 +52,9 @@ public class PlayersActivity implements PlayersView.Presenter {
     public void onCellTableSelected(Player player) {
         ApplicationResources.getHandlerManager().fireEvent(new DisplayPlayerEvent(player));
     }
+
+    @Override
+    public void onAddPlayer() {
+        display.unSelectedTable();
+    }
 }

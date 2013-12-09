@@ -10,4 +10,8 @@ public interface PlayerService {
     List<Player> findClassement();
 
     PlayerEntity findPlayer(String name);
+
+    void addPlayer(PlayerEntity player);
+
+    void updatePlayer(PlayerEntity player);
 }

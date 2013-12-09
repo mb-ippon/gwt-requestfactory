@@ -23,7 +23,6 @@ public class PlayerDaoImpl implements PlayerDao {
                 }
             }
             session.getTransaction().commit();
-
         }
         catch (Exception ex) {
             ex.printStackTrace();
@@ -40,6 +39,25 @@ public class PlayerDaoImpl implements PlayerDao {
         PlayerEntity player = (PlayerEntity) session.createQuery("select p from Player p where p.name = :name")
                 .setParameter("name", name).uniqueResult();
         return player;
+    }
+
+    @Override
+    public PlayerEntity findPlayer(Long id) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        PlayerEntity player = (PlayerEntity) session.load(PlayerEntity.class, id);
+        return player;
+    }
+
+    @Override
+    public void addPlayer(PlayerEntity player) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.persist(player);
+    }
+
+    @Override
+    public void updatePlayer(PlayerEntity player) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.update(player);
     }
 
 }

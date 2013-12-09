@@ -64,6 +64,11 @@
 			        <g:TextBox ui:field="country"></g:TextBox>		
 			    </div>
 			  </div>
+			  <div class="row">
+				  <div class="small-12 columns">
+					<g:Button ui:field="updatePlayer" text="{mes.player_update}" styleName="button tiny right"/>
+				  </div>
+			  </div>
 		</form>
 	</g:HTMLPanel>
 </ui:UiBinder> 

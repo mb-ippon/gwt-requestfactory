@@ -121,4 +121,8 @@ public class PlayersTable extends CellTable<Player> implements HasSelectionChang
         dataProvider.refresh();
         ColumnSortEvent.fire(this, this.getColumnSortList());
     }
+
+    public void unSelected() {
+        this.getSelectionModel().setSelected(this.getSelectedItem(), false);
+    }
 }

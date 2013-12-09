@@ -6,5 +6,9 @@ public interface PlayerView extends IsWidget {
 
     public interface Presenter {
 
+        void updatePlayer();
+
     }
+
+    void setPresenter(Presenter playersActivity);
 }

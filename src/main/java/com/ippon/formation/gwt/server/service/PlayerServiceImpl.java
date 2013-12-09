@@ -36,4 +36,14 @@ public class PlayerServiceImpl extends RemoteServiceServlet implements PlayerSer
     public PlayerEntity findPlayer(String name) {
         return dao.findPlayer(name);
     }
+
+    @Override
+    public void addPlayer(PlayerEntity player) {
+        dao.addPlayer(player);
+    }
+
+    @Override
+    public void updatePlayer(PlayerEntity player) {
+        dao.updatePlayer(player);
+    }
 }

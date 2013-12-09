@@ -9,4 +9,10 @@ public interface PlayerDao {
     List<PlayerEntity> findClassement();
 
     PlayerEntity findPlayer(String name);
+
+    PlayerEntity findPlayer(Long id);
+
+    void addPlayer(PlayerEntity player);
+
+    void updatePlayer(PlayerEntity player);
 }

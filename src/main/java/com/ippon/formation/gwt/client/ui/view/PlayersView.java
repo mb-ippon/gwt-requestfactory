@@ -16,6 +16,11 @@ public interface PlayersView extends IsWidget {
     public interface Presenter {
 
         void onCellTableSelected(Player player);
+
+        void onAddPlayer();
+
     }
+
+    void unSelectedTable();
 
 }
