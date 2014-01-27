@@ -27,7 +27,6 @@ import com.ippon.formation.gwt.shared.domain.entities.Player;
 public class PlayerActivity implements Presenter {
 
     private final PlayerView display;
-    private final PlayerDriver playerDriver = PlayerDriver.Util.getInstance();
 
     public PlayerActivity(PlayerView display) {
         this.display = display;
@@ -66,7 +65,8 @@ public class PlayerActivity implements Presenter {
      */
     protected void displayPlayer(Player player) {
         if (player != null) {
-            isUpdate = true;
+            isUpdate = false;
+
         }
     }
 
@@ -81,21 +81,15 @@ public class PlayerActivity implements Presenter {
 
     @Override
     public void updatePlayer() {
-        if (playerDriver.isDirty()) {
-            playerDriver.flush();
-            if (isUpdate) {
+        if (isUpdate) {
 
-            }
-            else {
-
-            }
+        }
+        else {
 
         }
     }
 
     private void bind() {
-
-        playerDriver.initialize((PlayerViewImpl) display);
 
         CountryRequest request = ApplicationResources.getRequestFactory().countryRequest();
         request.findCountries().fire(new Receiver<List<CountryProxy>>() {
