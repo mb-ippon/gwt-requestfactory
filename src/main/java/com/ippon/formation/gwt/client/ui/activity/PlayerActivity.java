@@ -1,5 +1,10 @@
 package com.ippon.formation.gwt.client.ui.activity;
 
+import java.util.List;
+
+import com.google.web.bindery.requestfactory.shared.Receiver;
+import com.ippon.formation.gwt.client.domain.bindery.rf.proxy.CountryProxy;
+import com.ippon.formation.gwt.client.domain.bindery.rf.request.CountryRequest;
 import com.ippon.formation.gwt.client.ui.event.AddPlayerEvent;
 import com.ippon.formation.gwt.client.ui.event.AddPlayerHandler;
 import com.ippon.formation.gwt.client.ui.event.DisplayPlayerEvent;
@@ -35,7 +40,7 @@ public class PlayerActivity implements Presenter {
     protected void displayPlayer(Player player) {
         if (player != null) {
             isUpdate = false;
-
+            display.setButtonEnabled(false);
         }
     }
 
@@ -59,6 +64,15 @@ public class PlayerActivity implements Presenter {
     }
 
     private void bind() {
+
+        CountryRequest request = ApplicationResources.getRequestFactory().countryRequest();
+        request.findCountries().fire(new Receiver<List<CountryProxy>>() {
+
+            @Override
+            public void onSuccess(List<CountryProxy> response) {
+                display.setDataCountry(response);
+            }
+        });
 
         display.setButtonEnabled(false);
 

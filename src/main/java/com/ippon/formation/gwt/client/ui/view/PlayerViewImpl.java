@@ -17,6 +17,7 @@ import com.google.gwt.user.client.ui.IntegerBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.datepicker.client.DateBox;
+import com.ippon.formation.gwt.client.domain.bindery.rf.proxy.CountryProxy;
 import com.ippon.formation.gwt.client.ui.resources.ApplicationResources;
 import com.ippon.formation.gwt.client.ui.widget.ListCountry;
 import com.ippon.formation.gwt.client.ui.widget.PlaysHanded;
@@ -128,7 +129,7 @@ public class PlayerViewImpl extends Composite implements PlayerView {
     }
 
     @Override
-    public void setDataCountry(List<?> response) {
+    public void setDataCountry(List<CountryProxy> response) {
         country.setData(response);
     }
 }
