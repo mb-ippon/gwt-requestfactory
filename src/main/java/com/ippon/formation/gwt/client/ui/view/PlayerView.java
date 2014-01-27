@@ -3,7 +3,6 @@ package com.ippon.formation.gwt.client.ui.view;
 import java.util.List;
 
 import com.google.gwt.user.client.ui.IsWidget;
-import com.ippon.formation.gwt.client.domain.bindery.rf.proxy.CountryProxy;
 
 public interface PlayerView extends IsWidget {
 
@@ -17,5 +16,5 @@ public interface PlayerView extends IsWidget {
 
     void setButtonEnabled(boolean b);
 
-    void setDataCountry(List<CountryProxy> response);
+    void setDataCountry(List<?> response);
 }
