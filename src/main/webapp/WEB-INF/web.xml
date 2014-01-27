@@ -5,11 +5,22 @@
          version="2.5"
          xmlns="http://java.sun.com/xml/ns/javaee">
          
+    <!-- Servlet request factory -->
+	<servlet>
+		<servlet-name>requestFactoryServlet</servlet-name>
+		<servlet-class>com.ippon.formation.gwt.server.servlet.RFHibernateServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>requestFactoryServlet</servlet-name>
+		<url-pattern>/gwtRequest</url-pattern>
+	</servlet-mapping>
+         
 	<!-- servlet rpc -->
 	<servlet>
 	  <servlet-name>playerService</servlet-name>
 	  <servlet-class>
-	    com.ippon.formation.gwt.server.service.PlayerServiceImpl
+	    com.ippon.formation.gwt.server.service.PlayerRPCImpl
 	  </servlet-class>
 	</servlet>
 	<servlet-mapping>

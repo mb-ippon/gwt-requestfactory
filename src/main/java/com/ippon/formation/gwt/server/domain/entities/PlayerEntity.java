@@ -3,6 +3,7 @@ package com.ippon.formation.gwt.server.domain.entities;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -13,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 import com.ippon.formation.gwt.shared.domain.entities.Plays;
 
@@ -50,11 +52,13 @@ public class PlayerEntity implements Serializable {
     private int weight;
     private int yearTurnPro;
     private Integer atpPoint;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "COUNTRY_ID")
     private CountryEntity country;
     @Enumerated(EnumType.ORDINAL)
     private Plays playHand;
+    @Version
+    private Integer version;
 
     public CountryEntity getCountry() {
         return country;
@@ -62,6 +66,10 @@ public class PlayerEntity implements Serializable {
 
     public void setCountry(CountryEntity country) {
         this.country = country;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 
     public void setBirthDay(Date birthDay) {
@@ -128,6 +136,14 @@ public class PlayerEntity implements Serializable {
         this.atpPoint = atpPoint;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -157,6 +173,10 @@ public class PlayerEntity implements Serializable {
             return false;
         }
         return true;
+    }
+
+    public Integer getVersion() {
+        return version;
     }
 
 }

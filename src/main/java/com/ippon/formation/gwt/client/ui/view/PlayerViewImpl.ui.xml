@@ -9,64 +9,65 @@
 	<g:HTMLPanel styleName="panel">
 		<form>
 			<div class="row">
-				<div class="small-3 columns">
+				<div class="small-4 columns">
 					<Label for="name" class="left inline" ui:field="lblName"></Label>
 			    </div>
-			    <div class="small-9 columns">
+			    <div class="small-8 columns">
 			    	<g:TextBox ui:field="name"></g:TextBox>	
 			    </div>
 			  </div>
 			  <div class="row">
-				<div class="small-3 columns">
+				<div class="small-4 columns">
 			    	<Label for="height" class="left inline" ui:field="lblHeight"></Label>
 			    </div>
-			    <div class="small-9 columns">
+			    <div class="small-8 columns">
 			         <g:IntegerBox ui:field="height"></g:IntegerBox>	
 			    </div>
 			  </div>
 			  <div class="row">
-				<div class="small-3 columns">
+				<div class="small-4 columns">
 			    	<Label for="weight" class="left inline" ui:field="lblWeight"></Label>
 			    </div>
-			    <div class="small-9 columns">
+			    <div class="small-8 columns">
 			         <g:IntegerBox ui:field="weight"></g:IntegerBox>	
 			    </div>
 			  </div>
 			  <div class="row">
-				<div class="small-3 columns">
+				<div class="small-4 columns">
 			    	<Label for="birthDay" class="left inline" ui:field="lblBirthday"></Label>
 			    </div>
-			    <div class="small-9 columns">
+			    <div class="small-8 columns">
 			         <date:DateBox ui:field="birthDay"></date:DateBox>	
 			    </div>
 			  </div>
+			  <w:PlaysHanded ui:field="plays"></w:PlaysHanded>
 			  <div class="row">
-				<div class="small-3 columns">
-			    	<Label for="playHand" class="left inline" ui:field="lblPlayHand"></Label>
-			    </div>
-			    <div class="small-9 columns">
-			        <w:PlaysBox ui:field="playHand"></w:PlaysBox>		
-			    </div>
-			  </div>
-			  <div class="row">
-				<div class="small-3 columns">
+				<div class="small-4 columns">
 			    	<Label for="yearTurnPro" class="left inline" ui:field="lblTurnPro"></Label>
 			    </div>
-			    <div class="small-9 columns">
+			    <div class="small-8 columns">
 			        <w:YearBox ui:field="yearTurnPro"></w:YearBox>		
 			    </div>
 			  </div>
 			  <div class="row">
-				<div class="small-3 columns">
+				<div class="small-4 columns">
 			    	<Label for="country" class="left inline" ui:field="lblCountry"></Label>
 			    </div>
-			    <div class="small-9 columns">
-			        <g:TextBox ui:field="country"></g:TextBox>		
+			    <div class="small-8 columns">
+			        <w:ListCountry ui:field="country"></w:ListCountry>		
+			    </div>
+			  </div>
+			  <div class="row">
+				<div class="small-4 columns">
+			    	<Label for="atpPoint" class="left inline" ui:field="lblAtpPoint"></Label>
+			    </div>
+			    <div class="small-8 columns">
+			         <g:IntegerBox ui:field="atpPoint"></g:IntegerBox>	
 			    </div>
 			  </div>
 			  <div class="row">
 				  <div class="small-12 columns">
-					<g:Button ui:field="updatePlayer" text="{mes.player_update}" styleName="button tiny right"/>
+					<g:Button ui:field="updatePlayer" text="{mes.player_confirm}" styleName="button tiny right"/>
 				  </div>
 			  </div>
 		</form>

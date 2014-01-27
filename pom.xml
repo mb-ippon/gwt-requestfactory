@@ -144,6 +144,13 @@
 						<target>${java.version}</target>
 						<encoding>${project.build.sourceEncoding}</encoding>
 					</configuration>
+					<dependencies>
+						<dependency>
+							<groupId>com.google.web.bindery</groupId>
+							<artifactId>requestfactory-apt</artifactId>
+							<version>${gwt.version}</version>
+						</dependency>
+					</dependencies>
 				</plugin>
 		</plugins>
 	</build>

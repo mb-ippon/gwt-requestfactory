@@ -1,41 +1,18 @@
 package com.ippon.formation.gwt.server.util;
 
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
-import org.hibernate.service.ServiceRegistryBuilder;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 public class HibernateUtil {
 
-    private static SessionFactory sessionFactory;
-    private static ServiceRegistry serviceRegistry;
+    private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("GWTFormationPU");
+    private static EntityManager entityManager;
 
-    private static SessionFactory buildSessionFactory() {
-        try {
-            // Create the SessionFactory from hibernate.cfg.xml
-            Configuration configuration = new Configuration();
-            configuration.configure("META-INF/hibernate.cfg.xml");
-            serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties())
-                    .buildServiceRegistry();
-            return configuration.buildSessionFactory(serviceRegistry);
+    public static EntityManager getEntityManager() {
+        if (entityManager == null) {
+            entityManager = entityManagerFactory.createEntityManager();
         }
-        catch (Throwable ex) {
-            // Make sure you log the exception, as it might be swallowed
-            System.err.println("Initial SessionFactory creation failed." + ex);
-            throw new ExceptionInInitializerError(ex);
-        }
+        return entityManager;
     }
-
-    public static SessionFactory getSessionFactory() {
-        if (sessionFactory == null) {
-            sessionFactory = buildSessionFactory();
-        }
-        return sessionFactory;
-    }
-
-    public static void shutdown() {
-        // Close caches and connection pools
-        getSessionFactory().close();
-    }
-
 }

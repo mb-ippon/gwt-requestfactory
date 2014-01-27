@@ -1,0 +1,16 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+	</ui:style>
+	<g:HTMLPanel stylePrimaryName="row">
+		<g:HTMLPanel stylePrimaryName="large-6 columns">
+			<g:RadioButton name="plays" ui:field="playsRight" stylePrimaryName="left" checked="true"></g:RadioButton>
+			<label class="left">Right Handed</label>
+		</g:HTMLPanel>
+		<g:HTMLPanel stylePrimaryName="large-6 columns">
+	      <g:RadioButton name="plays" ui:field="playsLeft" stylePrimaryName="left"></g:RadioButton>
+	      <label class="left">Left Handed</label>
+		</g:HTMLPanel>
+	</g:HTMLPanel>
+</ui:UiBinder> 

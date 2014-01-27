@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 @Entity(name = "Country")
 @Table(name = "country")
@@ -22,6 +23,8 @@ public class CountryEntity implements Serializable {
     private Long id;
     private String code;
     private String libelle;
+    @Version
+    private Integer version;
 
     public CountryEntity() {
     }
@@ -53,6 +56,14 @@ public class CountryEntity implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 
 }

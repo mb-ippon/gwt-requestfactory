@@ -5,7 +5,10 @@ import java.util.List;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.ippon.formation.gwt.client.domain.bindery.rpc.PlayerRPCAsync;
+import com.ippon.formation.gwt.client.ui.event.AddPlayerEvent;
 import com.ippon.formation.gwt.client.ui.event.DisplayPlayerEvent;
+import com.ippon.formation.gwt.client.ui.event.ReloadPlayerHandler;
+import com.ippon.formation.gwt.client.ui.event.ReloadPlayersEvent;
 import com.ippon.formation.gwt.client.ui.resources.ApplicationResources;
 import com.ippon.formation.gwt.client.ui.view.PlayersView;
 import com.ippon.formation.gwt.shared.domain.entities.Player;
@@ -25,6 +28,7 @@ public class PlayersActivity implements PlayersView.Presenter {
     public PlayersActivity(PlayersView display) {
         this.display = display;
         this.display.setPresenter(this);
+        bind();
     }
 
     /**
@@ -32,6 +36,10 @@ public class PlayersActivity implements PlayersView.Presenter {
      * 
      */
     public void go() {
+        reloadPlayers();
+    }
+
+    private void reloadPlayers() {
         display.loadingTable();
         server.findClassement(new AsyncCallback<List<Player>>() {
 
@@ -45,7 +53,6 @@ public class PlayersActivity implements PlayersView.Presenter {
                 Window.alert(caught.getMessage());
             }
         });
-
     }
 
     @Override
@@ -56,5 +63,17 @@ public class PlayersActivity implements PlayersView.Presenter {
     @Override
     public void onAddPlayer() {
         display.unSelectedTable();
+        ApplicationResources.getHandlerManager().fireEvent(new AddPlayerEvent());
+    }
+
+    private void bind() {
+
+        ApplicationResources.getHandlerManager().addHandler(ReloadPlayersEvent.TYPE, new ReloadPlayerHandler() {
+
+            @Override
+            public void onReloadPlayers(ReloadPlayersEvent event) {
+                reloadPlayers();
+            }
+        });
     }
 }

@@ -1,5 +1,7 @@
 package com.ippon.formation.gwt.client.ui.view;
 
+import java.util.List;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.editor.client.Editor;
@@ -14,12 +16,14 @@ import com.google.gwt.user.client.ui.IntegerBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.datepicker.client.DateBox;
+import com.ippon.formation.gwt.client.domain.bindery.rf.proxy.CountryProxy;
+import com.ippon.formation.gwt.client.domain.bindery.rf.proxy.PlayerProxy;
 import com.ippon.formation.gwt.client.ui.resources.ApplicationResources;
-import com.ippon.formation.gwt.client.ui.widget.PlaysBox;
+import com.ippon.formation.gwt.client.ui.widget.ListCountry;
+import com.ippon.formation.gwt.client.ui.widget.PlaysHanded;
 import com.ippon.formation.gwt.client.ui.widget.YearBox;
-import com.ippon.formation.gwt.shared.domain.entities.Player;
 
-public class PlayerViewImpl extends Composite implements PlayerView, Editor<Player> {
+public class PlayerViewImpl extends Composite implements PlayerView, Editor<PlayerProxy> {
 
     private static PlayerViewImplUiBinder uiBinder = GWT.create(PlayerViewImplUiBinder.class);
 
@@ -50,10 +54,6 @@ public class PlayerViewImpl extends Composite implements PlayerView, Editor<Play
 
     @UiField
     @Ignore
-    Element lblPlayHand;
-
-    @UiField
-    @Ignore
     Element lblTurnPro;
 
     @UiField
@@ -61,16 +61,16 @@ public class PlayerViewImpl extends Composite implements PlayerView, Editor<Play
     Element lblCountry;
 
     @UiField
+    @Ignore
+    Element lblAtpPoint;
+
+    @UiField
     @Path("birthDay")
     DateBox birthDay;
 
     @UiField
-    @Path("country.libelle")
-    TextBox country;
-
-    @UiField
-    @Path("playHand")
-    PlaysBox playHand;
+    @Path("country")
+    ListCountry country;
 
     @UiField
     @Path("height")
@@ -81,11 +81,30 @@ public class PlayerViewImpl extends Composite implements PlayerView, Editor<Play
     IntegerBox weight;
 
     @UiField
+    @Path("atpPoint")
+    IntegerBox atpPoint;
+
+    @UiField
     @Path("yearTurnPro")
     YearBox yearTurnPro;
 
     @UiField
     Button updatePlayer;
+
+    @UiField
+    @Path("playHand")
+    PlaysHanded plays;
+
+    @Override
+    public void setButtonEnabled(boolean b) {
+        updatePlayer.setEnabled(b);
+        if (b) {
+            updatePlayer.removeStyleName("disabled");
+        }
+        else {
+            updatePlayer.addStyleName("disabled");
+        }
+    }
 
     @UiHandler("updatePlayer")
     void onUpdatePlayer(ClickEvent e) {
@@ -103,9 +122,14 @@ public class PlayerViewImpl extends Composite implements PlayerView, Editor<Play
         lblBirthday.setInnerText(ApplicationResources.getMessages().player_birthday());
         lblCountry.setInnerText(ApplicationResources.getMessages().player_country());
         lblHeight.setInnerText(ApplicationResources.getMessages().player_height());
-        lblPlayHand.setInnerText(ApplicationResources.getMessages().player_play());
         lblTurnPro.setInnerText(ApplicationResources.getMessages().player_turnedpro());
         lblWeight.setInnerText(ApplicationResources.getMessages().player_weight());
+        lblAtpPoint.setInnerText(ApplicationResources.getMessages().player_point());
         birthDay.setFormat(new DateBox.DefaultFormat(DateTimeFormat.getFormat("dd MMMM yyyy")));
+    }
+
+    @Override
+    public void setDataCountry(List<CountryProxy> response) {
+        country.setData(response);
     }
 }

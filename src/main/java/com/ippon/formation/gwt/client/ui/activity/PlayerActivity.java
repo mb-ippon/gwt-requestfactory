@@ -1,7 +1,13 @@
 package com.ippon.formation.gwt.client.ui.activity;
 
+import java.util.List;
+
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.editor.client.SimpleBeanEditorDriver;
+import com.google.web.bindery.requestfactory.gwt.client.RequestFactoryEditorDriver;
+import com.google.web.bindery.requestfactory.shared.Receiver;
+import com.ippon.formation.gwt.client.domain.bindery.rf.proxy.CountryProxy;
+import com.ippon.formation.gwt.client.domain.bindery.rf.proxy.PlayerProxy;
+import com.ippon.formation.gwt.client.domain.bindery.rf.request.CountryRequest;
 import com.ippon.formation.gwt.client.ui.event.AddPlayerEvent;
 import com.ippon.formation.gwt.client.ui.event.AddPlayerHandler;
 import com.ippon.formation.gwt.client.ui.event.DisplayPlayerEvent;
@@ -35,7 +41,7 @@ public class PlayerActivity implements Presenter {
      * @author mbellang
      * 
      */
-    public interface PlayerDriver extends SimpleBeanEditorDriver<Player, PlayerViewImpl> {
+    public interface PlayerDriver extends RequestFactoryEditorDriver<PlayerProxy, PlayerViewImpl> {
 
         public class Util {
 
@@ -50,13 +56,18 @@ public class PlayerActivity implements Presenter {
         }
     }
 
+    PlayerProxy playerProxy;
+    private boolean isUpdate;
+
     /**
      * Affiche le détail d'un joueur
      * 
      * @param player
      */
     protected void displayPlayer(Player player) {
-        // TODO display a player
+        if (player != null) {
+            isUpdate = true;
+        }
     }
 
     /**
@@ -64,17 +75,38 @@ public class PlayerActivity implements Presenter {
      * 
      */
     protected void addPlayer() {
-        // TODO add a player
+        isUpdate = false;
+        display.setButtonEnabled(true);
     }
 
     @Override
     public void updatePlayer() {
-        // TODO update a player
+        if (playerDriver.isDirty()) {
+            playerDriver.flush();
+            if (isUpdate) {
 
+            }
+            else {
+
+            }
+
+        }
     }
 
     private void bind() {
+
         playerDriver.initialize((PlayerViewImpl) display);
+
+        CountryRequest request = ApplicationResources.getRequestFactory().countryRequest();
+        request.findCountries().fire(new Receiver<List<CountryProxy>>() {
+
+            @Override
+            public void onSuccess(List<CountryProxy> response) {
+                display.setDataCountry(response);
+            }
+        });
+
+        display.setButtonEnabled(false);
 
         ApplicationResources.getHandlerManager().addHandler(DisplayPlayerEvent.TYPE, new DisplayPlayerHandler() {
 
