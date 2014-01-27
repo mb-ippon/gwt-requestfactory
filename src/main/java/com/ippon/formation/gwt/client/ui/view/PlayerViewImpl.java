@@ -4,8 +4,7 @@ import java.util.List;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.editor.client.Editor.Ignore;
-import com.google.gwt.editor.client.Editor.Path;
+import com.google.gwt.editor.client.Editor;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -18,12 +17,13 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.datepicker.client.DateBox;
 import com.ippon.formation.gwt.client.domain.bindery.rf.proxy.CountryProxy;
+import com.ippon.formation.gwt.client.domain.bindery.rf.proxy.PlayerProxy;
 import com.ippon.formation.gwt.client.ui.resources.ApplicationResources;
 import com.ippon.formation.gwt.client.ui.widget.ListCountry;
 import com.ippon.formation.gwt.client.ui.widget.PlaysHanded;
 import com.ippon.formation.gwt.client.ui.widget.YearBox;
 
-public class PlayerViewImpl extends Composite implements PlayerView {
+public class PlayerViewImpl extends Composite implements PlayerView, Editor<PlayerProxy> {
 
     private static PlayerViewImplUiBinder uiBinder = GWT.create(PlayerViewImplUiBinder.class);
 
