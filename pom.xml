@@ -13,7 +13,9 @@
 		<joda.version>2.2</joda.version>
 		<hsql.version>2.2.8</hsql.version>
 		<hibernate.version>4.1.4.Final</hibernate.version>
-		<hibernate-validator.version>4.3.0.Final</hibernate-validator.version>
+		<hibernate-validator.version>4.1.0.Final</hibernate-validator.version>
+		<slf4j.version>1.6.1</slf4j.version>
+		<log4j.version>1.2.16</log4j.version>
 		<!-- plugin -->
 		<java.version>1.7</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -81,6 +83,27 @@
 		  	<groupId>org.hibernate</groupId>
 		  	<artifactId>hibernate-validator</artifactId>
 		  	<version>${hibernate-validator.version}</version>
+		</dependency>
+		<dependency>
+		  	<groupId>org.hibernate</groupId>
+		  	<artifactId>hibernate-validator</artifactId>
+		  	<version>${hibernate-validator.version}</version>
+		  	<classifier>sources</classifier>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>${log4j.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hsqldb</groupId>

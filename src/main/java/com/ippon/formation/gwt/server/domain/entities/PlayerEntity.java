@@ -31,8 +31,8 @@ public class PlayerEntity implements Serializable {
 
     }
 
-    public PlayerEntity(String name, int height, int weight, Date birthDay, Plays playHand, int yearTurnPro,
-            Integer atpPoint, CountryEntity country) {
+    public PlayerEntity(String name, Integer height, Integer weight, Date birthDay, Plays playHand,
+            Integer yearTurnPro, Integer atpPoint, CountryEntity country) {
         this.name = name;
         this.height = height;
         this.playHand = playHand;
@@ -48,9 +48,9 @@ public class PlayerEntity implements Serializable {
     private Long id;
     private String name;
     private Date birthDay;
-    private int height;
-    private int weight;
-    private int yearTurnPro;
+    private Integer height;
+    private Integer weight;
+    private Integer yearTurnPro;
     private Integer atpPoint;
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "COUNTRY_ID")
@@ -76,10 +76,6 @@ public class PlayerEntity implements Serializable {
         this.birthDay = birthDay;
     }
 
-    public void setAtpPoint(Integer atpPoint) {
-        this.atpPoint = atpPoint;
-    }
-
     public String getName() {
         return name;
     }
@@ -96,27 +92,27 @@ public class PlayerEntity implements Serializable {
         this.birthDay = birthDay;
     }
 
-    public int getHeight() {
+    public Integer getHeight() {
         return height;
     }
 
-    public void setHeight(int height) {
+    public void setHeight(Integer height) {
         this.height = height;
     }
 
-    public int getWeight() {
+    public Integer getWeight() {
         return weight;
     }
 
-    public void setWeight(int weight) {
+    public void setWeight(Integer weight) {
         this.weight = weight;
     }
 
-    public int getYearTurnPro() {
+    public Integer getYearTurnPro() {
         return yearTurnPro;
     }
 
-    public void setYearTurnPro(int yearTurnPro) {
+    public void setYearTurnPro(Integer yearTurnPro) {
         this.yearTurnPro = yearTurnPro;
     }
 
@@ -132,7 +128,7 @@ public class PlayerEntity implements Serializable {
         return atpPoint;
     }
 
-    public void setAtpPoint(int atpPoint) {
+    public void setAtpPoint(Integer atpPoint) {
         this.atpPoint = atpPoint;
     }
 

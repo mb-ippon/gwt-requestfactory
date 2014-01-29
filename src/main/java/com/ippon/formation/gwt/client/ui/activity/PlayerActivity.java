@@ -1,9 +1,14 @@
 package com.ippon.formation.gwt.client.ui.activity;
 
 import java.util.List;
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validator;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.validation.client.impl.Validation;
 import com.google.web.bindery.requestfactory.gwt.client.RequestFactoryEditorDriver;
 import com.google.web.bindery.requestfactory.shared.Receiver;
 import com.ippon.formation.gwt.client.domain.bindery.rf.proxy.CountryProxy;
@@ -33,6 +38,7 @@ public class PlayerActivity implements Presenter {
     private final PlayerView display;
     private final PlayerDriver playerDriver = PlayerDriver.Util.getInstance();
     private PlayerRequest request;
+    private final Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
     public PlayerActivity(PlayerView display) {
         this.display = display;
@@ -104,31 +110,37 @@ public class PlayerActivity implements Presenter {
     public void updatePlayer() {
         if (playerDriver.isDirty()) {
             playerDriver.flush();
-            if (isUpdate) {
-                request.updatePlayer(playerProxy).fire(new Receiver<Void>() {
+            Set<ConstraintViolation<PlayerProxy>> violations = validator.validate(playerProxy);
+            if (violations.isEmpty()) {
+                if (isUpdate) {
+                    request.updatePlayer(playerProxy).fire(new Receiver<Void>() {
 
-                    @Override
-                    public void onSuccess(Void response) {
-                        Window.alert("ok !");
-                        request = ApplicationResources.getRequestFactory().playerRequest();
-                        playerProxy = request.edit(playerProxy);
-                        playerDriver.edit(playerProxy, request);
-                    }
-                });
+                        @Override
+                        public void onSuccess(Void response) {
+                            Window.alert("ok !");
+                            request = ApplicationResources.getRequestFactory().playerRequest();
+                            playerProxy = request.edit(playerProxy);
+                            playerDriver.edit(playerProxy, request);
+                        }
+                    });
+                }
+                else {
+                    request.addPlayer(playerProxy).fire(new Receiver<Void>() {
+
+                        @Override
+                        public void onSuccess(Void response) {
+                            Window.alert("ok !");
+                            request = ApplicationResources.getRequestFactory().playerRequest();
+                            playerProxy = request.edit(playerProxy);
+                            playerDriver.edit(playerProxy, request);
+                        }
+                    });
+                }
+                ApplicationResources.getHandlerManager().fireEvent(new ReloadPlayersEvent());
             }
             else {
-                request.addPlayer(playerProxy).fire(new Receiver<Void>() {
-
-                    @Override
-                    public void onSuccess(Void response) {
-                        Window.alert("ok !");
-                        request = ApplicationResources.getRequestFactory().playerRequest();
-                        playerProxy = request.edit(playerProxy);
-                        playerDriver.edit(playerProxy, request);
-                    }
-                });
+                Window.alert("error : " + violations.toString());
             }
-            ApplicationResources.getHandlerManager().fireEvent(new ReloadPlayersEvent());
         }
     }
 

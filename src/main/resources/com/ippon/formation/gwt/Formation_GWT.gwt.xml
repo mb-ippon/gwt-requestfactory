@@ -4,6 +4,11 @@
 	<inherits name="com.google.gwt.user.User" />
 	<inherits name="com.google.common.collect.Collect"/>
 	<inherits name="com.google.web.bindery.requestfactory.RequestFactory" />
+	<inherits name="org.hibernate.validator.HibernateValidator" />
+	<replace-with
+  		class="com.ippon.formation.gwt.client.domain.validation.CustomValidatorFactory">
+  	<when-type-is class="javax.validation.ValidatorFactory" />
+</replace-with>
 	
 	<source path="client" />
 	<source path="shared" />
